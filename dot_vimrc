@@ -1,0 +1,69 @@
+set sw=2
+set path+=**
+set number
+set mouse=a
+set numberwidth=1
+set clipboard=unnamedplus
+syntax enable
+set showcmd
+set ruler
+set encoding=utf-8
+set showmatch
+set relativenumber
+set laststatus=2
+set nocompatible
+
+set title " Nombre del archivo en la ventana
+set nowrap
+set cursorline " Resalta linea actual
+set colorcolumn=120 " limite
+
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set shiftround
+set expandtab " espacios por tabs
+
+set hidden " permite cambiar de buffer sin guardarlos
+
+set ignorecase " Ignorar case en las busquedas
+set smartcase " No ignorar case si en la busqueda introducimos mayusculas
+set spelllang=en,es
+
+set termguicolors " true colors en la terminal
+set background=dark
+set t_Co=256
+
+let mapleader = " "
+nmap <Leader>w :w<CR>
+nmap <Leader>q :q<CR>
+
+nmap <Leader>c :!sh deploy.sh<CR>
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
+call plug#begin('~/.local/share/vim/plugins')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+call plug#end()
+
+
+" java mappings
+nmap <Leader>jc :CocCommand java.workspace.compile<CR>
+nmap <Leader>jl :CocCommand java.open.serverLog<CR>
+
+" Airline. Lista de buffers
+let g:airline#extensions#tabline#enabled=1
+" let g:airline#extensions#tabline#fnamemod=':t'
+let g:airline_theme='powerlineish'
+let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#enabled=1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
